@@ -1,6 +1,6 @@
 {
   "name": "my-task",
-  "homepage": "https://nguyencongtan98.github.io/my-tasks/",
+  "homepage": "https://nguyencongtan98.github.io/tasks/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
