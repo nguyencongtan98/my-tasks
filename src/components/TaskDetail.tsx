@@ -1,7 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Typography } from "@material-ui/core";
 import { useEffect, useState } from "react";
-import DatePicker from "react-datepicker";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { Box, Flex } from "rebass";
@@ -104,10 +103,6 @@ export const TaskDetail = (): JSX.Element => {
     margin: 0;
   `;
 
-  const [startDate, setStartDate] = useState(new Date());
-
-  const hanedleChange = () => {};
-
   return (
     <Box>
       <Typography variant="h5">{task?.name}</Typography>
@@ -130,7 +125,6 @@ export const TaskDetail = (): JSX.Element => {
           </Box>
           <Box sx={style}>
             <label htmlFor="">Create Date</label>
-            <DatePicker selected={startDate} onChange={hanedleChange} />
             <input
               {...CreateDateProps}
               // value={createDate as string}

@@ -16,6 +16,7 @@ export const Task = (props: TaskProps): JSX.Element => {
     onClick,
     onDelete,
   } = props;
+
   let statusText = "";
   let bgColor = "d";
 
@@ -48,7 +49,7 @@ export const Task = (props: TaskProps): JSX.Element => {
   return (
     <Flex
       id={id}
-        onClick={onClick}
+      onClick={onClick}
       sx={{
         textAlign: "left",
         background: bgColor,
@@ -66,10 +67,10 @@ export const Task = (props: TaskProps): JSX.Element => {
       {/* <Link to={`/task-detail/${id}`} id={id} onClick={onClick}>{name}</Link> */}
       <Box width="80%">{name}</Box>
       <Box width="20%" pr="10px" textAlign="right">
-        {/* {statusText} */}
-        <Button size="large" id={id} onClick={onDelete}>
+        <Button size="small" id={id} onClick={onDelete}>
           Delete
         </Button>
+        <p hidden>{statusText}</p>
       </Box>
     </Flex>
   );
