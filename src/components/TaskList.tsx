@@ -1,3 +1,4 @@
+import { Pagination } from "antd";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import firebase from "../firebase/firebase";
@@ -52,5 +53,9 @@ export const TaskList = (props: TaskListProps): JSX.Element => {
       />
     );
   });
-  return <>{result}</>;
+  return (
+    <>
+      <div className="list-group">{result}</div>
+    </>
+  );
 };

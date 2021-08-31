@@ -1,6 +1,14 @@
+import {
+  Button,
+  Card,
+  CardActionArea,
+  CardActions,
+  CardContent,
+  Typography,
+  Collapse,
+} from "@material-ui/core";
 import React from "react";
-import { Box, Flex } from "rebass";
-import { Button } from "antd";
+import styled from "styled-components";
 import { TaskInfo } from "../types/task";
 import "./general.css";
 
@@ -12,66 +20,59 @@ type TaskProps = {
 
 export const Task = (props: TaskProps): JSX.Element => {
   const {
-    taskInfo: { id, name, status },
+    taskInfo: { id, name, status, description },
     onClick,
     onDelete,
   } = props;
 
-  let statusText = "";
-  let bgColor = "d";
+  const HeaderStyled = styled.div`
+    display: flex;
+    justify-content: space-between;
+      align-items: center;
+      span{
+        color:red;
+        font-weight:bold;
+      }
+    }
+  `;
 
-  switch (status) {
-    case 1:
-      statusText = "Open";
-      bgColor = "#6d24e3";
-      break;
-    case 2:
-      statusText = "Doing";
-      bgColor = "#dbbd5a";
-      break;
-    case 3:
-      statusText = "Done";
-      bgColor = "#9fe09d";
-      break;
-    case 4:
-      statusText = "Cancel";
-      bgColor = "darkGray";
-      break;
-    case 5:
-      statusText = "Re Open";
-      bgColor = "6d24e3";
-      break;
-
-    default:
-      break;
-  }
+  const CardActionsStyled = styled(CardActions)`
+    .hehe: {
+      margin-top: 0;
+    }
+  `;
 
   return (
-    <Flex
-      id={id}
-      onClick={onClick}
-      sx={{
-        textAlign: "left",
-        background: bgColor,
-        fontWeight: "bold",
-        ml: "5px",
-        mb: "5px",
-        mr: "20px",
-        pl: "5px",
-        height: "50px",
-        lineHeight: "50px",
-        borderRadius: "5px",
-        ":hover": { background: "grey", cursor: "pointer" },
-      }}
-    >
-      {/* <Link to={`/task-detail/${id}`} id={id} onClick={onClick}>{name}</Link> */}
-      <Box width="80%">{name}</Box>
-      <Box width="20%" pr="10px" textAlign="right">
-        <Button size="small" id={id} onClick={onDelete}>
-          Delete
-        </Button>
-        <p hidden>{statusText}</p>
-      </Box>
-    </Flex>
+    <Card style={{ borderLeft: "10px solid green", marginBottom: "5px" }}>
+      <CardActionArea>
+        <CardContent style={{ padding: "0 10px" }} id={id} onClick={onClick}>
+          <HeaderStyled>
+            <Typography
+              style={{ padding: 0 }}
+              gutterBottom
+              variant="h5"
+              component="h2"
+            >
+              {name}
+            </Typography>
+            <span>{status}</span>
+          </HeaderStyled>
+          <Typography variant="body2" color="textSecondary" component="p">
+            {description}
+          </Typography>
+        </CardContent>
+        <CardActionsStyled>
+          <Button
+            className="hehe"
+            size="small"
+            color="primary"
+            style={{ border: "1px solid orange" }}
+            onClick={onDelete}
+          >
+            Delete
+          </Button>
+        </CardActionsStyled>
+      </CardActionArea>
+    </Card>
   );
 };

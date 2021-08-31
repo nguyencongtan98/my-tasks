@@ -7,13 +7,13 @@ import { TaskList } from "./components/TaskList";
 import "./task.css";
 import firebase from "./firebase/firebase";
 import { TaskInfo } from "./types/task";
-import { Grid } from "@material-ui/core";
-import { MenuSideBar } from "./components/Menu";
+import { ButtonBase, Grid, Button } from "@material-ui/core";
+import { MenuSideBar } from "./components/MenuSideBar";
 // import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch, RootState } from "./state/store";
-import { Button } from "antd";
 import { PlusSquareOutlined } from "@ant-design/icons";
+import styled from "styled-components";
 
 function App() {
   // const [taskInfoList, setTaskInfoList] = useState<TaskInfo[]>([]);
@@ -129,6 +129,23 @@ function App() {
   //   });
   // };
 
+  const dataTmp = [
+    { value: "doing", label: "Doing" },
+    { value: "done", label: "Done" },
+    { value: "closed", label: "Close" },
+    { value: "open", label: "open" },
+  ];
+
+  const addToto = () => {
+    dataTmp.forEach((item) => {
+      const { label, value } = item;
+      firebase.firestore().collection("status").add({
+        value,
+        label,
+      });
+    });
+  };
+
   const [taskList2, setTaskList2] = useState<TaskInfo[]>([]);
   // const taskList = useSelector((state: RootState) => state.task);
 
@@ -166,6 +183,13 @@ function App() {
     dispatch.taskDetail.setTaskDetail({ taskId: "" });
   };
 
+  const TaskListControlStyled = styled.div`
+    padding: 5px;
+    button {
+      margin-top: 10px;
+    }
+  `;
+
   return (
     // <Box className="App">
     //   <TaskList taskList={taskInfoList} />
@@ -175,20 +199,23 @@ function App() {
         <Route path="/">
           {/* <button onClick={addToto}>ADD TODO</button> */}
           {/* <button onClick={deleteTodo}>Delete TODO</button> */}
+
           <Grid container>
-            <Grid item sm={3} xs={12}>
+            <Grid item sm={2}>
               <MenuSideBar />
             </Grid>
-            <Grid item sm={5} xs={12}>
-              <TaskList taskList={taskList2} />
-              <Button
-                type="text"
-                icon={<PlusSquareOutlined />}
-                className="add-room"
-                onClick={setTaskDetailAddTask}
-              >
-                Add task
-              </Button>
+            <Grid item sm={6} xs={12}>
+              <TaskListControlStyled>
+                <TaskList taskList={taskList2} />
+                <Button
+                  variant="contained"
+                  fullWidth
+                  onClick={setTaskDetailAddTask}
+                  color="primary"
+                >
+                  Add task
+                </Button>
+              </TaskListControlStyled>
             </Grid>
             <Grid item sm={4} xs={12}>
               <TaskDetail />
