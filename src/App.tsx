@@ -1,19 +1,18 @@
+import { Button, Grid } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import "./App.css";
-import { TaskDetail } from "./components/TaskDetail";
-import { TaskList } from "./components/TaskList";
-// import { TaskManage } from "./components/TaskManage";
-import "./task.css";
-import firebase from "./firebase/firebase";
-import { TaskInfo } from "./types/task";
-import { ButtonBase, Grid, Button } from "@material-ui/core";
-import { MenuSideBar } from "./components/MenuSideBar";
 // import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { Dispatch, RootState } from "./state/store";
-import { PlusSquareOutlined } from "@ant-design/icons";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import styled from "styled-components";
+import "./App.css";
+import { MenuSideBar } from "./components/MenuSideBar";
+import { TaskDetail } from "./components/TaskDetail";
+import { TaskList } from "./components/TaskList";
+import firebase from "./firebase/firebase";
+import { Dispatch, RootState } from "./state/store";
+// import { TaskManage } from "./components/TaskManage";
+import "./task.css";
+import { TaskInfo } from "./types/task";
 
 function App() {
   // const [taskInfoList, setTaskInfoList] = useState<TaskInfo[]>([]);
@@ -129,22 +128,22 @@ function App() {
   //   });
   // };
 
-  const dataTmp = [
-    { value: "doing", label: "Doing" },
-    { value: "done", label: "Done" },
-    { value: "closed", label: "Close" },
-    { value: "open", label: "open" },
-  ];
+  // const dataTmp = [
+  //   { value: "doing", label: "Doing" },
+  //   { value: "done", label: "Done" },
+  //   { value: "closed", label: "Close" },
+  //   { value: "open", label: "open" },
+  // ];
 
-  const addToto = () => {
-    dataTmp.forEach((item) => {
-      const { label, value } = item;
-      firebase.firestore().collection("status").add({
-        value,
-        label,
-      });
-    });
-  };
+  // const addToto = () => {
+  //   dataTmp.forEach((item) => {
+  //     const { label, value } = item;
+  //     firebase.firestore().collection("status").add({
+  //       value,
+  //       label,
+  //     });
+  //   });
+  // };
 
   const [taskList2, setTaskList2] = useState<TaskInfo[]>([]);
   // const taskList = useSelector((state: RootState) => state.task);
@@ -177,7 +176,7 @@ function App() {
     if (taskList2) {
       dispatch.task.fetchTaskList(taskList2);
     }
-  }, [dispatch, taskList2, deleteId, taskDeleteId]);
+  }, [dispatch, taskList2, deleteId]);
 
   const setTaskDetailAddTask = () => {
     dispatch.taskDetail.setTaskDetail({ taskId: "" });
